@@ -17,7 +17,16 @@ npm run build       # production build (dist/)
 ```
 Deploy via GitHub Pages (included workflow) or any static host (Netlify, Vercel, S3).
 
+It’s a meditation written as a video game.
+
+Every time you notice your breath instead of your fear, you’ve “saved.”
+
+Every time you pause before reacting, you’ve “leveled up.”
+
+Every time you see your own mind acting instead of being lost inside it, you’ve unlocked another door.
+
 To know more about Game of Being and begin your own playable journey of awareness: https://amzn.in/d/hJeYtLd
+
 
 ---
 
