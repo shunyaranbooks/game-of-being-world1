@@ -1,50 +1,29 @@
-import React from 'react';
-import { useBreathLoop } from '../hooks/useBreathLoop';
+import React, { useEffect, useRef, useState } from "react";
+import { useApp } from "../state/store";
 
-type Props = { onSaved?: () => void; inhaleMs?: number; exhaleMs?: number };
+type Props = { inhaleMs?: number; exhaleMs?: number; onSaved?: () => void; label?: string; };
+export default function SaveButton({ inhaleMs = 3000, exhaleMs = 6000, onSaved, label="Save" }: Props) {
+  const [phase,setPhase]=useState<"idle"|"inhale"|"exhale"|"done">("idle");
+  const tRef=useRef<number|null>(null);
+  const saveBreath = useApp(s=>s.saveBreath);
 
-export default function SaveButton({ onSaved, inhaleMs = 3000, exhaleMs = 6000 }: Props) {
-  const { phase, progress, start } = useBreathLoop(inhaleMs, exhaleMs, onSaved);
+  const run=()=>{setPhase("inhale");
+    tRef.current=window.setTimeout(()=>{setPhase("exhale");
+      tRef.current=window.setTimeout(()=>{setPhase("done");saveBreath();onSaved?.();},exhaleMs);
+    },inhaleMs);};
+  useEffect(()=>{const onKey=(e:KeyboardEvent)=>{if(e.code==="Space"||e.key.toLowerCase()==="s"){e.preventDefault();if(phase==="idle")run();}};
+    window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey);},[phase]);
 
-  React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.repeat) return;
-      if (e.code === 'Space' || e.key.toLowerCase() === 's') {
-        e.preventDefault();
-        start();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [start]);
-
-  const label =
-    phase === 'idle'   ? 'Save' :
-    phase === 'inhale' ? 'Inhale…' :
-    phase === 'exhale' ? 'Exhale…' :
-    'Saved';
-
-  const sub =
-    phase === 'idle'   ? '(inhale 1 • exhale 2)' :
-    phase === 'inhale' ? 'Fill gently' :
-    phase === 'exhale' ? 'Let go—twice as long' :
-    'Checkpoint set';
-
-  const total =
-    phase === 'exhale' ? 0.5 + progress * 0.5 :
-    phase === 'inhale' ? progress * 0.5 :
-    phase === 'done'   ? 1 : 0;
-
-  return (
-    <div className="save-wrap" role="group" aria-label="Breath Save">
-      <button className={`save-btn ${phase}`} onClick={start}>
-        {label}
+  return(
+    <div className="stack">
+      <button className="btn" disabled={phase!=="idle"} onClick={()=>phase==="idle"&&run()}>
+        {phase==="idle"&&label}
+        {phase==="inhale"&&"Inhale…"}
+        {phase==="exhale"&&"Exhale…"}
+        {phase==="done"&&"Checkpoint set ✓"}
       </button>
-      <div className="save-sub">{sub}</div>
-      <div className="save-bar">
-        <div className="save-fill" style={{ transform: `scaleX(${total})` }} />
-      </div>
-      <div className="save-hint">Press <kbd>Space</kbd> or <kbd>S</kbd></div>
+      <div className="meta">(inhale 1 • exhale 2) — Press <span className="kbd">Space</span> or <span className="kbd">S</span></div>
+      <div id="halo"><div className="bar" style={{width: phase==="inhale"?"33%":phase==="exhale"?"100%":phase==="done"?"100%":"0%"}}/></div>
     </div>
   );
 }
