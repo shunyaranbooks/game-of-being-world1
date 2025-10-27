@@ -17,6 +17,7 @@ npm run build       # production build (dist/)
 ```
 Deploy via GitHub Pages (included workflow) or any static host (Netlify, Vercel, S3).
 
+Game of Being invents its own genre: playable philosophy —don’t just read philosophy, play it.
 It’s a meditation written as a video game.
 Every time you notice your breath instead of your fear, you’ve “saved.”
 Every time you pause before reacting, you’ve “leveled up.”
