@@ -37,7 +37,10 @@ Deploy via GitHub Pages (included workflow) or any static host (Netlify, Vercel,
 See [`/src/content.json`](src/content.json) to edit sections without touching code.
 
 - Section A: Loading Sequence (spawn, mission card, stones)  
-- Section B: Body Chamber (scan, controls, micro‑drills)  
+- Section B: Body Chamber (scan, controls, micro‑drills)
+- Section C · Paradox Hall
+- Section D · Ambient Field and Sentinel Preview
+- Section E · Choice Gate  
 - Section F: Engine Room (Six Rings, edit loop)  
 - Section G: Costume Room (roles → tools, Sentinel)  
 - Section H: Mirror Room (image vs awareness)  
