@@ -16,7 +16,8 @@ npm run dev         # start locally
 npm run build       # production build (dist/)
 ```
 Deploy via GitHub Pages (included workflow) or any static host (Netlify, Vercel, S3).
-To know more about Game of Being and begin your own playable journey of awareness: https://amzn.in/d/eWqj8is 
+
+To know more about Game of Being and begin your own playable journey of awareness: https://amzn.in/d/hJeYtLd
 
 ---
 
