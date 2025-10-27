@@ -2,7 +2,7 @@
 # Game of Being — World I · Level 1 — Who Am I?
 
 **Playable philosophy.** Don’t just read philosophy—play it.
-https://amzn.in/d/eWqj8is
+
 This repo hosts a lightweight React + Vite app that presents *World I — Level 1* as an interactive, developer‑ready scaffold. 
 Use it to build the full game, export printables, or host a demo site.
 
@@ -15,7 +15,7 @@ npm install
 npm run dev         # start locally
 npm run build       # production build (dist/)
 ```
-
+To know more about Game of Being and begin your own playable journey of awareness: https://amzn.in/d/eWqj8is
 Deploy via GitHub Pages (included workflow) or any static host (Netlify, Vercel, S3).
 
 ---
